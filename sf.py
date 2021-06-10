@@ -271,9 +271,9 @@ def main():
 	
         # path = '/data/'
 	# windows
-        path = '/mnt/c/dev/test/facesearch/'
+        # path = '/mnt/c/dev/test/facesearch/'
 	# server
-        # path = '/home/dave/facesearch/'
+        path = '/home/dave/facesearch/'
 
 
         ts = time.time()
