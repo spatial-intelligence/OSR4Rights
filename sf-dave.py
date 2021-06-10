@@ -277,7 +277,7 @@ def main():
 
 
         ts = time.time()
-	# DM commented out and hardcoded fo ease of debugging
+	    # DM commented out and hardcoded fo ease of debugging
         # res=process_faceimg(path,args ['inputfolder'],args ['jobid'])
         res=process_faceimg(path,'job1',1)
         te = time.time()
