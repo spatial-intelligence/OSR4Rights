@@ -25,10 +25,10 @@ import time
 # DM commented out for local debugging on VSCode
 
 #get the arguments for input and output folders
-# parser = argparse.ArgumentParser(description='FaceSearch Service')
-# parser.add_argument('-i','--inputfolder', help='Input Folder', required=True)
-# parser.add_argument('-j','--jobid', help='Job ID', required=True)
-# args = vars(parser.parse_args())
+parser = argparse.ArgumentParser(description='FaceSearch Service')
+parser.add_argument('-i','--inputfolder', help='Input Folder', required=True)
+parser.add_argument('-j','--jobid', help='Job ID', required=True)
+args = vars(parser.parse_args())
 
 def process_faceimg(path,jobfolder,jobid):
     
@@ -278,8 +278,11 @@ def main():
 
         ts = time.time()
 	    # DM commented out and hardcoded fo ease of debugging
-        # res=process_faceimg(path,args ['inputfolder'],args ['jobid'])
-        res=process_faceimg(path,'job1',1)
+        res=process_faceimg(path,args ['inputfolder'],args ['jobid'])
+
+        # res=process_faceimg(path,'job1',1)
+        # res=process_faceimg(path,'job2',2)
+
         te = time.time()
         tt = te-ts
         print('time taken: %2.4f secs' % tt)
