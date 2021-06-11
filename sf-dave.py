@@ -49,7 +49,7 @@ def process_faceimg(path,jobfolder,jobid):
         #go thru the list and build face encoding file
         writeEncodingFiles(images_toscan)
 
-        #get the target file  - called target.jpg
+        #get the target file  - called target (can be jpg, png, jpeg, gif)
         targetfaceencodings= updateTargetFaceEncodings(scanpath)
 
         if targetfaceencodings is not None:
