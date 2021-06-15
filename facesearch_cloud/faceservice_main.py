@@ -14,15 +14,15 @@ import cv2
 
 #get the arguments for input and output folders
 
-#parser = argparse.ArgumentParser(description='FaceSearch Service')
-#parser.add_argument('-i','--inputfolder', help='Input Folder', required=True)
-#parser.add_argument('-j','--jobid', help='Job ID', required=True)
-#args = vars(parser.parse_args())
+parser = argparse.ArgumentParser(description='FaceSearch Service')
+parser.add_argument('-i','--inputfolder', help='Input Folder', required=True)
+parser.add_argument('-j','--jobid', help='Job ID', required=True)
+args = vars(parser.parse_args())
 
 #for deubigging purposes
-args={}
-args['inputfolder']='/data/Dropbox/codebackup/FaceData/job1/'
-args['jobid']=1
+#args={}
+#args['inputfolder']='/data/Dropbox/codebackup/FaceData/job1/'
+#args['jobid']=1
 
 
 #added by default based on input folder
