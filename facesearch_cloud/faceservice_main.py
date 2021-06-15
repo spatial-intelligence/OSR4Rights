@@ -45,9 +45,10 @@ def generateReportPDF(results):
         f.writelines('<html><body><h1>::FaceSearch Results::</h1>')
         f.writelines('<h4>Note: Face difference values nearer 0 are the best matches</h4><br>')
 
-        section=[]
         
         for res in results:
+
+            section=[]
 
             print ('>>>  TARGET:',res[0])
 
@@ -95,6 +96,8 @@ def generateReportPDF(results):
                 f.writelines('<tr><td>'+fn_withoutpath+'</td><td>'+str(matchscore)+'</td><td> <img src="match_' +fn_withoutpath +'" alt="possible match" width="200"  > </td></tr>' )
 
             f.writelines('</table> <br>')
+
+            
 
 
         f.writelines('</body></html>')
