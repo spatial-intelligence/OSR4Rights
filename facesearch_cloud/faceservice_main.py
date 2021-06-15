@@ -10,6 +10,7 @@ import argparse
 import facesearch as fs
 import encode_images as ei
 import cv2
+import shutil
 
 
 #get the arguments for input and output folders
@@ -27,6 +28,7 @@ args = vars(parser.parse_args())
 
 #added by default based on input folder
 args['outputfolder']= args['inputfolder'] + 'results/'
+
 
 
 def generateReportPDF(results):
@@ -102,6 +104,10 @@ def generateReportPDF(results):
 
         f.writelines('</body></html>')
 
+
+def zipit(dir_name):
+    outfn = args['inputfolder']+'results_'+args['jobid']  #don't put in the output folder otherwise get an infinte loop!
+    shutil.make_archive(outfn, 'zip', dir_name)
     
     
     #fin= outpath+'/matches.html'
@@ -123,14 +129,24 @@ def main():
     fs.setPath(args['inputfolder'])
 
     #Scan the SEARCH and TARGET folders to build FACE ENCODING FILES
+    print ('encodding faces')
     fs.procimagescnn()
 
     #For EACH TARGET check the encoding files against all face encodings in the SEARCH folder
+    print ('matching faces')
     r=fs.searchfortarget()
     #print (r)
 
     #Generate an output from the scan - showing which images have the closest match
+    print ('generating report')
     generateReportPDF(r)
+
+    #Zip the html report into a single zip file
+    print ('zipping report')
+    zipit(args['outputfolder'])
+
+    #Zip the html report into a single zip file
+    print ('done')
 
 
 if __name__ == "__main__":
