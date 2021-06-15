@@ -273,7 +273,7 @@ def main():
 	# windows
         # path = '/mnt/c/dev/test/facesearch/'
 	# server
-        path = '/home/dave/facesearch/'
+        path = '/home/dave/facesearch/old/'
 
 
         ts = time.time()
