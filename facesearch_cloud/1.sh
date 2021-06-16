@@ -1,5 +1,6 @@
-rm -rf cjob1/search/*.fe
-rm -rf
-# ./faceservice_main.py -i ~/facesearch/job1/ -j 123
+# delete the face encoding files - for load testing timings
+# for load testing the GPU delete the face encoding files
+rm -rf cjob1/search/*.fe_cnn
+rm -rf cjob1/target/*.fe_cnn
+
 ./faceservice_main.py -i cjob1/ -j 123
-# python3 sf-dave.py -i job1 -j 1

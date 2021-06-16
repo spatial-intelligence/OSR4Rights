@@ -124,6 +124,7 @@ def zipit(dir_name):
 ###############################################################################################################################
 
 def main():
+    ts = time.time()
 
     #set up the  path for the functions
     fs.setPath(args['inputfolder'])
@@ -145,7 +146,9 @@ def main():
     print ('zipping report')
     zipit(args['outputfolder'])
 
-    #Zip the html report into a single zip file
+    te = time.time()
+    tt = te-ts
+    print('time taken: %2.2f secs' % tt)
     print ('done')
 
 
