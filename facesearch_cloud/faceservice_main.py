@@ -130,7 +130,7 @@ def main():
     fs.setPath(args['inputfolder'])
 
     #Scan the SEARCH and TARGET folders to build FACE ENCODING FILES
-    print ('encodding faces')
+    print ('encoding faces')
     fs.procimagescnn()
 
     #For EACH TARGET check the encoding files against all face encodings in the SEARCH folder
