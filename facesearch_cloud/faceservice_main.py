@@ -44,7 +44,13 @@ def generateReportPDF(results):
         os.mkdir(outpath)
 
     with open(outpath +'/matches.html', 'w') as f:
-        f.writelines('<html><body><h1>::FaceSearch Results::</h1>')
+        f.writelines('<html>')
+        f.writelines('<head><style> #results {  font-family: Arial, Helvetica, sans-serif; border-collapse: collapse;  width:60%; }')
+        f.writelines('#results td, #results th { border: 1px solid #ddd padding: 8px;}')
+        f.writelines('#results tr:hover {background-color: #ddd;} #results th { padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #04AA6D; color: white; } </style> </head>')
+        
+        
+        f.writelines('<body><h1> FaceSearch Results </h1>')
         f.writelines('<h4>Note: Face difference values nearer 0 are the best matches</h4><br>')
 
         
@@ -52,32 +58,44 @@ def generateReportPDF(results):
 
             section=[]
 
+            f.writelines('<table id="results" ')
+
             print ('>>>  TARGET:',res[0])
 
-            f.writelines('<h3>TARGET:</h3> <br>')
+            f.writelines('<tr><td><h3>TARGET:</h3> </td>')
+            f.writelines('<td>'+res[0]+'</td><td>')
+
             
-            f.writelines(res[0])
-            
-            f.writelines('<table>')
-            
+            #make a thumbnail of the target img for the report
+            fint = args['inputfolder'] +  res[0]
+            reducedImage = ei.imgresize(fint)
+
+            #save as target_ in the results folder
+            fn_withoutpath = os.path.basename(fint)
+            resultimg = outpath + 'target_'+fn_withoutpath
+
+            cv2.imwrite(resultimg, reducedImage)
+            f.writelines('<img src="target_' +fn_withoutpath +'" alt=target image" width="250" >  </td><tr><br></tr>' )
+
+
             
             for item in res[1]:
                 
                 if float(item[1])<0.25 and (1 not in section):
-                    f.writelines('<tr><td><h2>very good match</h2></td></tr>')
+                    f.writelines('<tr><td style="background-color:#f2f2f2"><h3>very good match</h3></td><td style="background-color:#f2f2f2"></td><<td style="background-color:#f2f2f2"></td></tr>')
                     section.append(1)
                 elif float(item[1])<0.37 and (2 not in section):
                     section.append(2)
-                    f.writelines('<tr><td><br><h2>good match</h2></td></tr>')
+                    f.writelines('<tr><td style="background-color:#f2f2f2"><h3>good match</h3></td><td style="background-color:#f2f2f2"></td><<td style="background-color:#f2f2f2"></td></tr>')
                 elif float(item[1])<0.55 and (3 not in section):
                     section.append(3)
-                    f.writelines('<tr><td><br><h2>possible match</h2></td></tr>')
+                    f.writelines('<tr><td style="background-color:#f2f2f2"><h3>possible match</h3></td><td style="background-color:#f2f2f2"></td><td style="background-color:#f2f2f2"></td></tr>')
                 elif float(item[1])<0.6 and (4 not in section):
                     section.append(4)
-                    f.writelines('<tr><td><br><h2>maybe a match</h2></td><tr>')
+                    f.writelines('<tr><td style="background-color:#f2f2f2"><h3>maybe a match</h3></td><td style="background-color:#f2f2f2"></td><td style="background-color:#f2f2f2"></td></tr>')
                 elif float(item[1])<0.7 and (5 not in section):
                     section.append(5)
-                    f.writelines('<tr><td><br><h2>some similarities</h2></td></tr>')
+                    f.writelines('<tr><td style="background-color:#f2f2f2"><h3>some similarities</h3></td><td style="background-color:#f2f2f2"></td><td style="background-color:#f2f2f2"></td></tr>')
 
                 matchscore= "%.2f" % item[1]  
 
@@ -95,14 +113,11 @@ def generateReportPDF(results):
 
                 cv2.imwrite(resultimg, reducedImage)
                 
-                f.writelines('<tr><td>'+fn_withoutpath+'</td><td>'+str(matchscore)+'</td><td> <img src="match_' +fn_withoutpath +'" alt="possible match" width="200"  > </td></tr>' )
-
-            f.writelines('</table> <br>')
-
-            
-
+                f.writelines('<tr><td>'+fn_withoutpath+'</td><td>'+str(matchscore)+'</td><td> <img src="match_' +fn_withoutpath +'" alt="possible match" width="250"  > </td></tr>' )
+            f.writelines('</table> <hr> <br>')
 
         f.writelines('</body></html>')
+
 
 
 def zipit(dir_name):
