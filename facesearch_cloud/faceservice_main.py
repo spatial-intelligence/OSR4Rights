@@ -121,7 +121,7 @@ def generateReportPDF(results):
 
 
 def zipit(dir_name):
-    outfn = args['inputfolder']+'results_'+args['jobid']  #don't put in the output folder otherwise get an infinte loop!
+    outfn = args['inputfolder']+'results_'+str(args['jobid'])  #don't put in the output folder otherwise get an infinte loop!
     shutil.make_archive(outfn, 'zip', dir_name)
     
     
