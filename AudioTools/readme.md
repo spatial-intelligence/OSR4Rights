@@ -8,6 +8,6 @@ Processess include:
   -- SPEECH to TEXT on any input audio file <br>
 
  
- 
+ Uses SpeechBrain python library.
  
 
