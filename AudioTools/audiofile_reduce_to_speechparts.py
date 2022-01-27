@@ -12,15 +12,12 @@ import torchaudio
 
 from pprint import pprint
 
-
-
 ################################################
 #Setup
 #===============================================
 #
 # pip install -q torchaudio soundfile
 #################################################
-
 
 #get the arguments for input and output folders
 
@@ -39,27 +36,23 @@ args = vars(parser.parse_args())
 args['outputfolder']= args['inputfolder'] + 'results/'
 
 
-#Load models
-
-#-----Speech only-----
-#original
+#Load model
 
 model, utils = torch.hub.load(repo_or_dir='snakers4/silero-vad',
                               model='silero_vad',
                               force_reload=True)
 
-(get_speech_timestamps,
- _, read_audio,
- *_) = utilst_speech_ts,get_speech_ts_adaptive,save_audio,read_audio,state_generator,single_audio_stream,collect_chunks) = utils
+(get_speech_timestamps,save_audio, read_audio,utils,collect_chunks) =  utils
 
 
 
 def getSpeechOnly (fin):
 
     wav = read_audio(fin)
+    print (fin)
 
     # get speech timestamps from full audio file
-    speech_timestamps = get_speech_ts(wav, model,  num_steps=4)
+    speech_timestamps = get_speech_timestamps(wav, model)
     pprint(speech_timestamps)
 
     fout= os.path.dirname(fin)+'/results/'+os.path.basename(fin).split('.')[0]+'__voiceparts_only.wav'
@@ -81,6 +74,8 @@ def zipit(dir_name):
 
 
 
+
+
 def main():
     ts = time.time()
 
@@ -92,24 +87,21 @@ def main():
 
 
     ##Get list of WAV files to processes
-
     wavlist= glob.glob(args['inputfolder']+'*.wav')+  glob.glob(args['inputfolder']+'*.WAV')
+    print ('files to process:',wavlist)
 
     for fn_inputwav in wavlist:
 
-        try:
-
-            print (" ---> Processing file: ",fn_inputwav)
-
-            fn_withoutext = fn_inputwav
+       # try:
+        print (" ---> Processing file: ",fn_inputwav)
 
             #reduce file to speech only sections
-            print ('  [Job 1]: reduce to speech only sections')
-            fn_sp_enhanced = getSpeechOnly(fn_inputwav)
+        print ('  [Job 1]: reduce to speech only sections')
+        fn_sp_enhanced = getSpeechOnly(fn_inputwav)
 
 
-        except:
-            print ("   ======>>>>  Error processing:",fn_inputwav)
+        #except:
+        #    print ("   ======>>>>  Error processing:",fn_inputwav)
 
 
 
