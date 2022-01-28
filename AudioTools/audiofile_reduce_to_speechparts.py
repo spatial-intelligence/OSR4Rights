@@ -15,8 +15,11 @@ from pprint import pprint
 ################################################
 #Setup
 #===============================================
-#
-# pip install -q torchaudio soundfile
+# sudo apt install python3-pip -y
+# sudo apt-get install libsndfile1
+# sudo apt-get install libsndfile1-dev
+# pip install torchaudio -f https://download.pytorch.org/whl/torch_stable.html
+# pip install  soundfile
 #################################################
 
 #get the arguments for input and output folders
