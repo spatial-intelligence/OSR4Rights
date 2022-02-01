@@ -60,7 +60,10 @@ def getSpeechOnly (fin):
 
     fout= os.path.dirname(fin)+'/results/'+os.path.basename(fin).split('.')[0]+'__voiceparts_only.wav'
 
-    save_audio(fout, collect_chunks(speech_timestamps, wav), 16000) 
+    # Check if speech_timestamps array (or sequence?) contains something because save_audio will error otherwise
+    # can happen when there is no speech eg music only
+    if speech_timestamps:
+       save_audio(fout, collect_chunks(speech_timestamps, wav), 16000) 
 
     print ('voice parts filtered')
 
