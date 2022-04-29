@@ -58,7 +58,7 @@ def generateReportPDF(results):
 
             section=[]
 
-            f.writelines('<table id="results" ')
+            f.writelines('<table id="results"> ')
 
             print ('>>>  TARGET:',res[0])
 
